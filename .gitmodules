@@ -1,3 +1,6 @@
 [submodule "theme/edgy"]
 	path = theme/edgy
 	url = git@github.com:wit-ctel/edgy.git
+[submodule "local/academicyear"]
+	path = local/academicyear
+	url = git@github.com:wit-ctel/Moodle-local_academic-year.git
