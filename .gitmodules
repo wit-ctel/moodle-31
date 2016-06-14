@@ -7,3 +7,6 @@
 [submodule "blocks/academic_year"]
 	path = blocks/academic_year
 	url = git@github.com:wit-ctel/Moodle-block_academic-year.git
+[submodule "course/format/simple"]
+	path = course/format/simple
+	url = git@github.com:wit-ctel/moodle-format_simple.git
