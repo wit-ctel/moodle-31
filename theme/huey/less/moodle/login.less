@@ -1,0 +1,73 @@
+.loginbox {
+    margin-top: 2em;
+    
+    &.twocolumns .loginpanel {
+        border: none;
+        background: inherit;
+        box-shadow: none;
+    }
+    
+    .loginpanel .loginsub {
+        background-color: rgb(255,255,255);
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 4px;
+        box-shadow: -2px 2px 1px rgba(0, 0, 0, 0.3);
+        padding: 18px;
+        border-color: #eee;
+        border-style: solid;
+        border-width: 1px 1px 0 0;
+    }
+    
+    .loginpanel h2 {
+        margin-top: 0;
+        .sr-only();
+    }
+    
+    .signuppanel h2, .text_to_html {
+        color: #eee;
+        text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+    }
+     
+    .support {
+        color: #f2a96e;
+    } 
+    
+    &.twocolumns .loginpanel {
+        .make-sm-column(5);
+        .make-sm-column-push(7);
+        .make-lg-column(4);
+        .make-lg-column-push(8);
+    }
+    
+    &.twocolumns .signuppanel {
+        left: auto; // unset column-push(1)
+        .make-sm-column(7);
+        .make-sm-column-pull(5);
+        .make-lg-column(8);
+        .make-lg-column-pull(4);
+    }
+
+    .desc {
+        font-size: 30px;
+        font-weight: 300;
+        color: @text-color;
+    }
+
+    .subcontent {
+        text-align: left;
+        .desc {
+            display: none;
+        }
+    }
+}
+
+.image-attribution {
+    color: #fff;
+    float: right;
+		margin-top: 18px;
+}
+
+body#page-login-index {
+    background: url([[pix:theme|home/background-xs]]) no-repeat center center fixed;
+    background-size: cover; 
+}
