@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function theme_cerulean_process_css($css, $theme) {
+function theme_huey_process_css($css, $theme) {
 
     // Set the background image for the logo.
     $logo = $theme->setting_file_url('logo', 'logo');
@@ -104,3 +104,49 @@ function theme_huey_set_customcss($css, $customcss) {
 
     return $css;
 }
+
+function huey_grid($hassidepre, $hassidepost) {
+    if ($hassidepre && $hassidepost) {
+        $regions = array('content' => 'col-sm-4 col-sm-push-4 col-md-6 col-md-push-3');
+        $regions['pre'] = 'col-sm-4 col-sm-pull-4 col-md-3 col-md-pull-6';
+        $regions['post'] = 'col-sm-4 col-md-3';
+    } else if ($hassidepre && !$hassidepost) {
+        $regions = array('content' => 'col-sm-8 col-sm-push-4 col-md-9 col-md-push-3');
+        $regions['pre'] = 'col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9';
+        $regions['post'] = 'emtpy';
+    } else if (!$hassidepre && $hassidepost) {
+        $regions = array('content' => 'col-sm-8 col-md-9');
+        $regions['pre'] = 'empty';
+        $regions['post'] = 'col-sm-4 col-md-3';
+    } else if (!$hassidepre && !$hassidepost) {
+        $regions = array('content' => 'col-md-12');
+        $regions['pre'] = 'empty';
+        $regions['post'] = 'empty';
+    }
+    return $regions;
+}
+
+/**
+ * Prints form with a dropdown list of courses, which when submitted, views the selected course
+ *
+ * @param array $courses - courses to be included in the dropdown list
+ */
+function print_jumpto_course_form($courses, $formid, $prompt, $return=false) {
+    global $CFG, $USER, $OUTPUT;;
+    
+    // prepare courses for use in popup_form()
+    foreach ($courses as $course) {
+        $courses[$course->id] = $course->fullname;
+    }
+    
+    $output = $OUTPUT->single_select(new moodle_url($CFG->wwwroot.'/course/view.php'), 
+                                        'id', $courses, '', array('' => $prompt), $formid);   
+                                        
+    if($return) {
+        return $output;
+    } else {
+        echo $output;
+    }
+}
+
+
