@@ -97,7 +97,7 @@ $THEME->layouts = array(
         'defaultregion' => 'side-pre',
     ),
     'login' => array(
-        'file' => 'default.php',
+        'file' => 'login.php',
         'regions' => array(),
         'options' => array('langmenu' => true, 'nonavbar' => true),
     ),
