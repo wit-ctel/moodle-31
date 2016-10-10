@@ -4,6 +4,9 @@
 @import "../../bootstrap/less/moodle.less";
 @import "variables.less";
 @import "bootswatch.less";
+@import "moodle/footer.less";
+@import "moodle/navs.less";
+
 
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -14,6 +17,22 @@
        url('[[font:theme|glyphicons-halflings-regular.svg]]') format('svg');
 }
 
+/* buttom customisations */
 .btn {
   text-shadow: none;
+}
+
+
+button,
+input.form-submit,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+#notice .singlebutton + .singlebutton input,
+.submit.buttons input[name="cancel"] {
+  .btn-shadow(@btn-default-bg);
+
+  &:hover {
+    .btn-shadow(darken(@btn-default-bg, 4%));
+  }
 }
