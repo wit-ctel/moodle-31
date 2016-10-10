@@ -19461,6 +19461,41 @@ div.feedback_item_commands_left {
 .panel-primary .panel-title {
   color: #fff;
 }
+/** buttons.less **/
+/* buttom customisations */
+.btn {
+  text-shadow: none;
+}
+button,
+input.form-submit,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+#notice .singlebutton + .singlebutton input,
+.submit.buttons input[name="cancel"] {
+  background-image: -webkit-linear-gradient(#ffffff, #eeeeee 50%, #e4e4e4);
+  background-image: -o-linear-gradient(#ffffff, #eeeeee 50%, #e4e4e4);
+  background-image: linear-gradient(#ffffff, #eeeeee 50%, #e4e4e4);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe4e4e4', GradientType=0);
+  filter: none;
+  border: 1px solid #d5d5d5;
+}
+button:hover,
+input.form-submit:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+#notice .singlebutton + .singlebutton input:hover,
+.submit.buttons input[name="cancel"]:hover {
+  background-image: -webkit-linear-gradient(#ffffff, #e4e4e4 50%, #dadada);
+  background-image: -o-linear-gradient(#ffffff, #e4e4e4 50%, #dadada);
+  background-image: linear-gradient(#ffffff, #e4e4e4 50%, #dadada);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdadada', GradientType=0);
+  filter: none;
+  border: 1px solid #cacaca;
+}
 /** footer.less **/
 html {
   position: relative;
@@ -19561,42 +19596,21 @@ body {
   margin-left: 0;
   /* [1] */
 }
+/** blocks.less **/
+.block_course_contents .section-list {
+  list-style: none;
+  padding: 0;
+  margin-left: 5px;
+}
+.block_course_contents .section-item {
+  list-style-image: none;
+  padding: 4px;
+}
+.block_course_contents .section-item.selected {
+  background-color: #d7ecf7;
+}
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('[[font:theme|glyphicons-halflings-regular.eot]]');
   src: url('[[font:theme|glyphicons-halflings-regular.eot]]?#iefix') format('embedded-opentype'), url('[[font:theme|glyphicons-halflings-regular.woff]]') format('woff'), url('[[font:theme|glyphicons-halflings-regular.ttf]]') format('truetype'), url('[[font:theme|glyphicons-halflings-regular.svg]]') format('svg');
-}
-/* buttom customisations */
-.btn {
-  text-shadow: none;
-}
-button,
-input.form-submit,
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-#notice .singlebutton + .singlebutton input,
-.submit.buttons input[name="cancel"] {
-  background-image: -webkit-linear-gradient(#ffffff, #eeeeee 50%, #e4e4e4);
-  background-image: -o-linear-gradient(#ffffff, #eeeeee 50%, #e4e4e4);
-  background-image: linear-gradient(#ffffff, #eeeeee 50%, #e4e4e4);
-  background-repeat: no-repeat;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe4e4e4', GradientType=0);
-  filter: none;
-  border: 1px solid #d5d5d5;
-}
-button:hover,
-input.form-submit:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-#notice .singlebutton + .singlebutton input:hover,
-.submit.buttons input[name="cancel"]:hover {
-  background-image: -webkit-linear-gradient(#ffffff, #e4e4e4 50%, #dadada);
-  background-image: -o-linear-gradient(#ffffff, #e4e4e4 50%, #dadada);
-  background-image: linear-gradient(#ffffff, #e4e4e4 50%, #dadada);
-  background-repeat: no-repeat;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdadada', GradientType=0);
-  filter: none;
-  border: 1px solid #cacaca;
 }
