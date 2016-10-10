@@ -1,0 +1,22 @@
+/** buttons.less **/
+
+
+/* buttom customisations */
+.btn {
+  text-shadow: none;
+}
+
+
+button,
+input.form-submit,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+#notice .singlebutton + .singlebutton input,
+.submit.buttons input[name="cancel"] {
+  .btn-shadow(@btn-default-bg);
+
+  &:hover {
+    .btn-shadow(darken(@btn-default-bg, 4%));
+  }
+}
