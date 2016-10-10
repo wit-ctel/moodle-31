@@ -19609,6 +19609,145 @@ body {
 .block_course_contents .section-item.selected {
   background-color: #d7ecf7;
 }
+.loginbox {
+  margin-top: 2em;
+}
+.loginbox.twocolumns .loginpanel {
+  border: none;
+  background: inherit;
+  box-shadow: none;
+}
+.loginbox .loginpanel .loginsub {
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  box-shadow: -2px 2px 1px rgba(0, 0, 0, 0.3);
+  padding: 18px;
+  border-color: #eee;
+  border-style: solid;
+  border-width: 1px 1px 0 0;
+}
+.loginbox .loginpanel h2 {
+  margin-top: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.loginbox .signuppanel h2,
+.loginbox .text_to_html {
+  color: #eee;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
+}
+.loginbox .support {
+  color: #f2a96e;
+}
+.loginbox.twocolumns .loginpanel {
+  position: relative;
+  min-height: 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 768px) {
+  .loginbox.twocolumns .loginpanel {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 768px) {
+  .loginbox.twocolumns .loginpanel {
+    left: 58.33333333%;
+  }
+}
+@media (min-width: 1200px) {
+  .loginbox.twocolumns .loginpanel {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+@media (min-width: 1200px) {
+  .loginbox.twocolumns .loginpanel {
+    left: 66.66666667%;
+  }
+}
+.loginbox.twocolumns .signuppanel {
+  left: auto;
+  position: relative;
+  min-height: 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 768px) {
+  .loginbox.twocolumns .signuppanel {
+    float: left;
+    width: 58.33333333%;
+  }
+}
+@media (min-width: 768px) {
+  .loginbox.twocolumns .signuppanel {
+    right: 41.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .loginbox.twocolumns .signuppanel {
+    float: left;
+    width: 66.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .loginbox.twocolumns .signuppanel {
+    right: 33.33333333%;
+  }
+}
+.loginbox .desc {
+  font-size: 30px;
+  font-weight: 300;
+  color: #666;
+}
+.loginbox .subcontent {
+  text-align: left;
+}
+.loginbox .subcontent .desc {
+  display: none;
+}
+.image-attribution {
+  color: #fff;
+  float: right;
+  margin-top: 18px;
+}
+body#page-login-index {
+  background: url([[pix:theme|home/background-xs]]) no-repeat center center fixed;
+  background-size: cover;
+}
+/* responsive.less */
+@media (min-width: 768px) {
+  body#page-login-index,
+  body#page-maintenance-message {
+    background: url([[pix:theme|home/background-sm]]) no-repeat center center fixed;
+    background-size: cover;
+  }
+}
+@media (min-width: 1200px) {
+  body#page-login-index,
+  body#page-maintenance-message {
+    background: url([[pix:theme|home/background-lg]]) no-repeat center center fixed;
+    background-size: cover;
+  }
+}
+@media (min-width: 768px) {
+  body {
+    margin: 0 0 150px;
+  }
+  #page-footer nav {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+  }
+}
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('[[font:theme|glyphicons-halflings-regular.eot]]');
