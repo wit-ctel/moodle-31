@@ -27,7 +27,7 @@ $THEME->parents = array('bootstrap');
 
 $THEME->doctype = 'html5';
 $THEME->sheets = array('custom');
-$THEME->lessfile = 'spacelab';
+$THEME->lessfile = 'huey';
 $THEME->parents_exclude_sheets = array('bootstrap' => array('moodle'));
 $THEME->lessvariablescallback = 'theme_huey_less_variables';
 $THEME->extralesscallback = 'theme_huey_extra_less';
