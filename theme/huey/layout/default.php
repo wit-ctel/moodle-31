@@ -52,7 +52,7 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
-<nav role="navigation" class="navbar navbar-default">
+<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
     <div class="navbar-header pull-left">
         <?php echo $OUTPUT->navbar_brand(); ?>
