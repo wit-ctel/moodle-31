@@ -19289,6 +19289,7 @@ div.feedback_item_commands_left {
   text-align: right;
 }
 .navbar {
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
   background-image: -webkit-linear-gradient(#ffffff, #eee 50%, #e4e4e4);
   background-image: -o-linear-gradient(#ffffff, #eee 50%, #e4e4e4);
   background-image: linear-gradient(#ffffff, #eee 50%, #e4e4e4);
@@ -19460,6 +19461,18 @@ div.feedback_item_commands_left {
 }
 .panel-primary .panel-title {
   color: #fff;
+}
+/** buttons.less **/
+#page {
+  margin-bottom: 3em;
+}
+#block-region-side-pre {
+  border-right: 2px solid #eee;
+}
+@media (min-width: 768px) {
+  #block-region-side-pre {
+    font-size: 0.92857em;
+  }
 }
 /** buttons.less **/
 /* buttom customisations */
