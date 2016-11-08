@@ -1,0 +1,40 @@
+/** blocks.less **/
+
+.block_course_contents {
+  .section-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 5px;
+  }
+  
+  .section-item {
+    list-style-image: none;
+    padding: 4px;
+  }
+  
+  .section-item.selected {
+     background-color: lighten(@link-color, 50%);
+  }
+}
+
+.block_course_overview {
+  border: none;
+  box-shadow: none;
+  
+  .header {
+    background-color: inherit;
+    padding-left: 0;
+    padding-right: 0;
+    
+    h2 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 8px;
+    }
+  
+  }
+  
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
