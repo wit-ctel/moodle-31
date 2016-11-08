@@ -6,9 +6,7 @@
   text-shadow: none;
 }
 
-
 button,
-input.form-submit,
 input[type="button"],
 input[type="submit"],
 input[type="reset"],
@@ -18,5 +16,13 @@ input[type="reset"],
 
   &:hover {
     .btn-shadow(darken(@btn-default-bg, 4%));
+  }
+}
+
+input.form-submit, #id_submitbutton {
+  .btn-shadow(@btn-primary-bg);
+
+  &:hover {
+    .btn-shadow(darken(@btn-primary-bg, 4%));
   }
 }
