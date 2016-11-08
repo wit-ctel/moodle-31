@@ -1,5 +1,5 @@
-# config valid only for Capistrano 3.1
-lock '3.2.1'
+# config valid only for Capistrano 3.6
+lock '3.6.1'
 
 set :application, 'moodle-wit'
 set :repo_url, 'git@github.com:wit-ctel/moodle-31.git'
