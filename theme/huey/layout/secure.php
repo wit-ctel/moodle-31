@@ -16,19 +16,15 @@
 
 $hassidepre = $PAGE->blocks->region_has_content('side-pre', $OUTPUT);
 $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
-$regions = edgy_grid($hassidepre, $hassidepost);
+$regions = huey_grid($hassidepre, $hassidepost);
 
 $PAGE->requires->jquery();
-$PAGE->requires->jquery_plugin('bootstrap', 'theme_bootstrap');
-
-$settingshtml = theme_edgy_html_for_settings($PAGE);
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
 <head>
     <title><?php echo $OUTPUT->page_title(); ?></title>
     <link rel="shortcut icon" href="<?php echo $OUTPUT->favicon(); ?>" />
-    <?php echo $settingshtml->brandfontlink; ?>
     <?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
 </head>
@@ -43,23 +39,22 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
-<nav role="navigation" class="<?php echo $settingshtml->navbarclass ?>">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#moodle-navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="brand" href="<?php echo $CFG->wwwroot;?>"><?php echo $SITE->shortname; ?></a>
-
-        <div id="moodle-navbar" class="navbar-collapse collapse">
-            <?php echo $OUTPUT->custom_menu(); ?>
-            <ul class="nav pull-right">
-                <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
-                <li class="navbar-text"><?php echo $OUTPUT->login_info() ?></li>
-            </ul>
-        </div>
+<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+    <div class="navbar-header pull-left">
+        <?php echo $OUTPUT->navbar_brand(); ?>
+    </div>
+    <div class="navbar-header pull-right">
+        <?php echo $OUTPUT->user_menu(); ?>
+        <?php echo $OUTPUT->navbar_button(); ?>
+    </div>
+    <div id="moodle-navbar" class="navbar-collapse collapse navbar-right">
+        <?php echo $OUTPUT->custom_menu(); ?>
+        <ul class="nav pull-right">
+            <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
+        </ul>
+    </div>
+    
     </div>
 </nav>
 
