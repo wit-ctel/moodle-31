@@ -24,21 +24,15 @@
  * breaking installation or upgrade unwittingly.
  */
 
-$regions = edgy_grid(false, false);
-
+$regions = huey_grid($hassidepre, $hassidepost);
 $PAGE->set_popup_notification_allowed(false);
 $PAGE->requires->jquery();
-$PAGE->requires->jquery_plugin('bootstrap', 'theme_edgy');
-$PAGE->requires->jquery_plugin('edgier', 'theme_edgy');
-
-$settingshtml = theme_edgy_html_for_settings($PAGE);
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
   <head>
     <title><?php echo $OUTPUT->page_title(); ?></title>
     <link rel="shortcut icon" href="<?php echo $OUTPUT->favicon(); ?>" />
-    <?php echo $settingshtml->brandfontlink; ?>
     <?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
   </head>

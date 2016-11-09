@@ -29,11 +29,9 @@ $THEME->doctype = 'html5';
 $THEME->sheets = array('custom');
 $THEME->lessfile = 'huey';
 $THEME->parents_exclude_sheets = array('bootstrap' => array('moodle'));
-$THEME->lessvariablescallback = 'theme_huey_less_variables';
-$THEME->extralesscallback = 'theme_huey_extra_less';
 $THEME->supportscssoptimisation = false;
 $THEME->yuicssmodules = array();
-$THEME->enable_dock = true;
+$THEME->enable_dock = false;
 $THEME->editor_sheets = array();
 
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
