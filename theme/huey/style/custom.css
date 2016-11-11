@@ -19505,7 +19505,8 @@ input[type="reset"]:hover,
   border: 1px solid #cacaca;
 }
 input.form-submit,
-#id_submitbutton {
+#id_submitbutton,
+#id_submitbutton2 {
   background-image: -webkit-linear-gradient(#6d94bf, #446E9B 50%, #3e648d);
   background-image: -o-linear-gradient(#6d94bf, #446E9B 50%, #3e648d);
   background-image: linear-gradient(#6d94bf, #446E9B 50%, #3e648d);
@@ -19515,7 +19516,8 @@ input.form-submit,
   border: 1px solid #345578;
 }
 input.form-submit:hover,
-#id_submitbutton:hover {
+#id_submitbutton:hover,
+#id_submitbutton2:hover {
   background-image: -webkit-linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
   background-image: -o-linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
   background-image: linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
@@ -19902,6 +19904,14 @@ body#page-login-index {
     vertical-align: middle;
     text-align: right;
   }
+}
+/* modules.less */
+.jsenabled .usermenu .moodle-actionmenu.show .menu a:hover {
+  background-image: -webkit-linear-gradient(top, #d9edf7 0%, #cce7f4 100%);
+  background-image: -o-linear-gradient(top, #d9edf7 0%, #cce7f4 100%);
+  background-image: linear-gradient(to bottom, #d9edf7 0%, #cce7f4 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffcce7f4', GradientType=0);
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
