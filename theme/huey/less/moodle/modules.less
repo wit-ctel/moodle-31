@@ -1,0 +1,19 @@
+/* modules.less */
+
+// user menu customisations 
+
+.jsenabled {
+    .usermenu {
+        .moodle-actionmenu {
+        
+          &.show {
+              .menu {
+                  
+                  a:hover {
+                      #gradient > .vertical(@state-info-bg, darken(@state-info-bg, 3%));
+                  }
+                }
+            }
+        }
+    }
+}
