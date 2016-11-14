@@ -19506,7 +19506,8 @@ input[type="reset"]:hover,
 }
 input.form-submit,
 #id_submitbutton,
-#id_submitbutton2 {
+#id_submitbutton2,
+.singlebutton input[value="Continue"] {
   background-image: -webkit-linear-gradient(#6d94bf, #446E9B 50%, #3e648d);
   background-image: -o-linear-gradient(#6d94bf, #446E9B 50%, #3e648d);
   background-image: linear-gradient(#6d94bf, #446E9B 50%, #3e648d);
@@ -19517,7 +19518,8 @@ input.form-submit,
 }
 input.form-submit:hover,
 #id_submitbutton:hover,
-#id_submitbutton2:hover {
+#id_submitbutton2:hover,
+.singlebutton input[value="Continue"]:hover {
   background-image: -webkit-linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
   background-image: -o-linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
   background-image: linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
