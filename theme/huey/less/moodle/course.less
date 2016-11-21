@@ -87,7 +87,6 @@
         }
         
         .sectionname {
-          display: inline;
           margin: 0;
           text-align: left;
           padding-right: 0.3em;
@@ -137,5 +136,21 @@
       }
       
     }
-    
+}
+
+.course-content {
+  
+  h3.sectionname {
+    display: inline-block;
+  }
+  
+  ul {
+    li.section.hidden {
+      opacity: inherit;
+      
+      .sectionname, .content-toggle, .section-modchooser {
+        opacity: 0.6;
+      }
+    }
+  }
 }
