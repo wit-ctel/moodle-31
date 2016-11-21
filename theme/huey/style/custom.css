@@ -19732,7 +19732,6 @@ body {
   margin-top: 0;
 }
 .section--single .section__navigation .sectionname {
-  display: inline;
   margin: 0;
   text-align: left;
   padding-right: 0.3em;
@@ -19767,6 +19766,17 @@ body {
   font-size: 12px;
   text-transform: uppercase;
   color: #666;
+}
+.course-content h3.sectionname {
+  display: inline-block;
+}
+.course-content ul li.section.hidden {
+  opacity: inherit;
+}
+.course-content ul li.section.hidden .sectionname,
+.course-content ul li.section.hidden .content-toggle,
+.course-content ul li.section.hidden .section-modchooser {
+  opacity: 0.6;
 }
 .loginbox {
   margin-top: 2em;
