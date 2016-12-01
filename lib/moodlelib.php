@@ -5653,7 +5653,7 @@ function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', 
         $mail->FromName = fullname($from);
     } else {
         $mail->From     = $CFG->noreplyaddress;
-        $mail->FromName = fullname($from);
+        $mail->FromName = $CFG->noreplyaddress;
         if (empty($replyto)) {
             $tempreplyto[] = array($CFG->noreplyaddress, get_string('noreplyname'));
         }
