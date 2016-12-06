@@ -5650,7 +5650,7 @@ function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', 
         $mail->FromName = $from;
     } else if ($usetrueaddress and $from->maildisplay) {
         $mail->From     = $from->email;
-        $mail->FromName = $from->email;
+        $mail->FromName = fullname($from);
     } else {
         $mail->From     = $CFG->noreplyaddress;
         $mail->FromName = $CFG->noreplyaddress;
