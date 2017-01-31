@@ -42,4 +42,14 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 
+    // Enter Login Page Notification HTML
+    $name = 'theme_huey/loginnotification';
+    $title = 'Custom Login Notification';
+    $description = 'Enter HTML for Notification';
+    $default = '';
+    $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $settings->add($setting);
+   
+
 }

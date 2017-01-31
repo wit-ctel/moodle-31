@@ -38,5 +38,8 @@ $string['pluginname'] = 'Huey';
 $string['customcss'] = 'Custom CSS';
 $string['customcssdesc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page, making for easier customization of this theme.';
 
+//$string['loginnotification'] = 'Login Notification';
+//$string['loginnotificationdesc'] = 'Enter HTML for the login page notification';
+
 $string['region-side-post'] = 'Right';
 $string['region-side-pre'] = 'Left';
