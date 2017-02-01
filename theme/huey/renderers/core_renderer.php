@@ -38,15 +38,15 @@ class theme_huey_core_renderer extends theme_bootstrap_core_renderer {
      *
      * @return string
      */
+    
     public function login_notification() {    
-        $loginnotification = 'loginnotification';
-        $notificationcontent = get_config('theme_huey', $loginnotification);
-        if(!empty($notificationcontent)) {
-            $output = html_writer::start_tag('div', array('id'=>'custom_menu_'. $loginnotification, 'class'=>'alert alert-warning', 'style'=>'margin-top: -35px;', 'role'=>'alert'));
-            $output .= $notificationcontent;
-            $output .= html_writer::end_tag('div');          
-            return $output;
-        }      
+        $template = new stdClass();   
+        $loginnotification = get_config('theme_huey', 'loginnotification');  
+        
+        if($loginnotification !='<br>' && $loginnotification != ''){  
+            $template->loginnotificationcontent = $loginnotification;
+            return $this->render_from_template('theme_huey/login_notification', $template);
+        }
     }
     
 }
