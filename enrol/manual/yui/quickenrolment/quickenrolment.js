@@ -101,7 +101,7 @@ YUI.add('moodle-enrol_manual-quickenrolment', function(Y) {
                     .append(create('<div class="'+CSS.CONTENT+'"></div>')
                         .append(create('<div class="'+CSS.SEARCHCONTROLS+'"></div>')
                             .append(create('<div class="'+CSS.ENROLMENTOPTION+' '+CSS.ROLE+'"><label for="id_enrol_manual_assignable_roles">'+M.util.get_string('assignroles', 'role')+'</label></div>')
-                                    .append(create('<select id="id_enrol_manual_assignable_roles"><option value="">'+M.util.get_string('none', 'enrol')+'</option></select>'))
+                                    .append(create('<select id="id_enrol_manual_assignable_roles"></select>'))
                             )
                             .append(create('<div class="'+CSS.ENTITYSELECTOR+'"></div>'))
                             .append(create('<div class="'+CSS.SEARCHOPTIONS+'"></div>')
@@ -198,9 +198,9 @@ YUI.add('moodle-enrol_manual-quickenrolment', function(Y) {
                 var index = 0, count = 0;
                 for (var i in roles) {
                     count++;
-                    var option = create('<option value="' + roles[i].id + '">' + roles[i].name + '</option>');
-                    if (roles[i].id == v) {
-                        index = count;
+                    var option = create('<option value="'+i+'">'+roles[i]+'</option>');
+                    if (i == v) {
+                        index = count-1;
                     }
                     s.append(option);
                 }
@@ -227,7 +227,6 @@ YUI.add('moodle-enrol_manual-quickenrolment', function(Y) {
         populateDuration : function() {
             var select = this.get(UEP.BASE).one('.'+CSS.ENROLMENTOPTION+'.'+CSS.DURATION+' select');
             var defaultvalue = this.get(UEP.DEFAULTDURATION);
-            var prefix = Math.round(defaultvalue) != defaultvalue ? '≈' : '';
             var index = 0, count = 0;
             var durationdays = M.util.get_string('durationdays', 'enrol', '{a}');
             for (var i = 1; i <= 365; i++) {
@@ -237,11 +236,6 @@ YUI.add('moodle-enrol_manual-quickenrolment', function(Y) {
                     index = count;
                 }
                 select.append(option);
-            }
-            if (!index && defaultvalue > 0) {
-                select.append(create('<option value="'+defaultvalue+'">'+durationdays.replace('{a}',
-                    prefix + (Math.round(defaultvalue * 100) / 100))+'</option>'));
-                index = ++count;
             }
             select.set('selectedIndex', index);
         },
