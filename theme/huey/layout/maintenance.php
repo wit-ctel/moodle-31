@@ -23,6 +23,8 @@
  * If you are modifying this file please be extremely careful, one wrong API call and you could end up
  * breaking installation or upgrade unwittingly.
  */
+$hassidepre = $PAGE->blocks->region_has_content('side-pre', $OUTPUT);
+$hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
 
 $regions = huey_grid($hassidepre, $hassidepost);
 $PAGE->set_popup_notification_allowed(false);
