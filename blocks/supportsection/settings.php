@@ -13,23 +13,27 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
- 
+
 /**
- * Strings for component 'block_student_fee', language 'en'
+ * student fee block admin settings
  *
  * @package    block_supportsection
  * @copyright  2017 Pete Windle, WIT (www.wit.ie)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Support Section';
-$string['supportsection'] = 'Support Section';
-$string['supportsection:addinstance'] = 'Add a new simple HTML block';
-$string['supportsection:myaddinstance'] = 'Add a new simple HTML block to the My Moodle page';
-$string['labelsupportsectiontitle'] = 'Support RSS Feed';
-$string['dessupportsectiontitle'] = 'Enter the URL of the RSS feed on the eLearning Website';
-$string['defaultsupportsectiontitle'] = 'http://';
-$string['labelsupportsectionsearchtitle'] = 'Support Search URL';
-$string['dessupportsectionsearchtitle'] = 'Enter the URL of the Search Area on the eLearning Website';
-$string['defaultsupportsectionsearchtitle'] = 'http://';
+defined('MOODLE_INTERNAL') || die;
+
+$settings->add(new admin_setting_configtext(
+            'block_supportsection/support_section_rss_url',
+            get_string('labelsupportsectiontitle', 'block_supportsection'),
+            get_string('dessupportsectiontitle', 'block_supportsection'),
+            get_string('defaultsupportsectiontitle', 'block_supportsection')
+        ));
+
+$settings->add(new admin_setting_configtext(
+            'block_supportsection/support_section_search_url',
+            get_string('labelsupportsectionsearchtitle', 'block_supportsection'),
+            get_string('dessupportsectionsearchtitle', 'block_supportsection'),
+            get_string('defaultsupportsectionsearchtitle', 'block_supportsection')
+        ));

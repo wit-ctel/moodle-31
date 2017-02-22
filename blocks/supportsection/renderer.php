@@ -18,32 +18,37 @@
  * student fee block renderer
  *
  * @package    block_student_fee
- * @copyright  2016 Cathal O'Riordan, WIT (www.wit.ie)
+ * @copyright  2017 Pete Windle, WIT (www.wit.ie)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Student_fee block rendrer
+ * Support Section Block Rendrer
  *
- * @copyright  2016 Cathal O'Riordan, WIT (www.wit.ie)
+ * @copyright  2017 Pete Windle, WIT (www.wit.ie)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 class block_supportsection_renderer extends plugin_renderer_base {
     
-    public function display_search(){
+    /**
+     * Call the Support Section RSS feed from elearning website
+     *  
+     * @return [type] [description]
+     */
+    public function display_search($supportrssurl,$supportsearchurl){
         
-        $template = new stdClass();      
-        $supportrssurl = "http://staging.elearning.wit.ie/support/moodle-support-section";
+        $template = new stdClass();
         $supportxml = simplexml_load_file($supportrssurl);
         $supportarray = array();
 
-
+        // create simple array from the complex XML object
+        // include only the item title and URL
         for($i = 0; $i < 5; $i++){
             $title = (string)$supportxml->channel->item[$i]->title;
-            $url = (string)$supportxml->channel->item[$i]->url;
+            $url = (string)$supportxml->channel->item[$i]->link;
             $supportarray[$i] = array(
                 'key' => $i,
                 'title' => $title,
@@ -51,6 +56,7 @@ class block_supportsection_renderer extends plugin_renderer_base {
             }
 
         $template->supportarray = $supportarray;
+        $template->supportsearch = $supportsearchurl;
         return $this->render_from_template('block_supportsection/search', $template);
     }
     
