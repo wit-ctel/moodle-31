@@ -19925,6 +19925,10 @@ body#page-login-index {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffcce7f4', GradientType=0);
 }
+.path-mod-page ul,
+.path-mod-page ol {
+  padding-left: 2em;
+}
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('[[font:theme|glyphicons-halflings-regular.eot]]');
