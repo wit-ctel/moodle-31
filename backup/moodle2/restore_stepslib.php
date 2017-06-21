@@ -121,6 +121,21 @@ class restore_gradebook_structure_step extends restore_structure_step {
             return false;
         }
 
+        // Identify the backup we're dealing with.
+        $backuprelease = floatval($this->get_task()->get_info()->backup_release); // The major version: 2.9, 3.0, ...
+        $backupbuild = 0;
+        preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
+        if (!empty($matches[1])) {
+            $backupbuild = (int) $matches[1]; // The date of Moodle build at the time of the backup.
+        }
+
+        // On older versions the freeze value has to be converted.
+        // We do this from here as it is happening right before the file is read.
+        // This only targets the backup files that can contain the legacy freeze.
+        if ($backupbuild > 20150618 && ($backuprelease < 3.0 || $backupbuild < 20160527)) {
+            $this->rewrite_step_backup_file_for_legacy_freeze($fullpath);
+        }
+
         // Arrived here, execute the step
         return true;
      }
@@ -129,7 +144,7 @@ class restore_gradebook_structure_step extends restore_structure_step {
         $paths = array();
         $userinfo = $this->task->get_setting_value('users');
 
-        $paths[] = new restore_path_element('gradebook', '/gradebook');
+        $paths[] = new restore_path_element('attributes', '/gradebook/attributes');
         $paths[] = new restore_path_element('grade_category', '/gradebook/grade_categories/grade_category');
         $paths[] = new restore_path_element('grade_item', '/gradebook/grade_items/grade_item');
         if ($userinfo) {
@@ -141,7 +156,7 @@ class restore_gradebook_structure_step extends restore_structure_step {
         return $paths;
     }
 
-    protected function process_gradebook($data) {
+    protected function process_attributes($data) {
         // For non-merge restore types:
         // Unset 'gradebook_calculations_freeze_' in the course and replace with the one from the backup.
         $target = $this->get_task()->get_target();
@@ -581,6 +596,85 @@ class restore_gradebook_structure_step extends restore_structure_step {
             }
         }
     }
+
+    /**
+     * Rewrite step definition to handle the legacy freeze attribute.
+     *
+     * In previous backups the calculations_freeze property was stored as an attribute of the
+     * top level node <gradebook>. The backup API, however, do not process grandparent nodes.
+     * It only processes definitive children, and their parent attributes.
+     *
+     * We had:
+     *
+     * <gradebook calculations_freeze="20160511">
+     *   <grade_categories>
+     *     <grade_category id="10">
+     *       <depth>1</depth>
+     *       ...
+     *     </grade_category>
+     *   </grade_categories>
+     *   ...
+     * </gradebook>
+     *
+     * And this method will convert it to:
+     *
+     * <gradebook >
+     *   <attributes>
+     *     <calculations_freeze>20160511</calculations_freeze>
+     *   </attributes>
+     *   <grade_categories>
+     *     <grade_category id="10">
+     *       <depth>1</depth>
+     *       ...
+     *     </grade_category>
+     *   </grade_categories>
+     *   ...
+     * </gradebook>
+     *
+     * Note that we cannot just load the XML file in memory as it could potentially be huge.
+     * We can also completely ignore if the node <attributes> is already in the backup
+     * file as it never existed before.
+     *
+     * @param string $filepath The absolute path to the XML file.
+     * @return void
+     */
+    protected function rewrite_step_backup_file_for_legacy_freeze($filepath) {
+        $foundnode = false;
+        $newfile = make_request_directory(true) . DIRECTORY_SEPARATOR . 'file.xml';
+        $fr = fopen($filepath, 'r');
+        $fw = fopen($newfile, 'w');
+        if ($fr && $fw) {
+            while (($line = fgets($fr, 4096)) !== false) {
+                if (!$foundnode && strpos($line, '<gradebook ') === 0) {
+                    $foundnode = true;
+                    $matches = array();
+                    $pattern = '@calculations_freeze=.([0-9]+).@';
+                    if (preg_match($pattern, $line, $matches)) {
+                        $freeze = $matches[1];
+                        $line = preg_replace($pattern, '', $line);
+                        $line .= "  <attributes>\n    <calculations_freeze>$freeze</calculations_freeze>\n  </attributes>\n";
+                    }
+                }
+                fputs($fw, $line);
+            }
+            if (!feof($fr)) {
+                throw new restore_step_exception('Error while attempting to rewrite the gradebook step file.');
+            }
+            fclose($fr);
+            fclose($fw);
+            if (!rename($newfile, $filepath)) {
+                throw new restore_step_exception('Error while attempting to rename the gradebook step file.');
+            }
+        } else {
+            if ($fr) {
+                fclose($fr);
+            }
+            if ($fw) {
+                fclose($fw);
+            }
+        }
+    }
+
 }
 
 /**
@@ -2572,7 +2666,7 @@ class restore_calendarevents_structure_step extends restore_structure_step {
                 'courseid'       => $this->get_courseid(),
                 'groupid'        => $data->groupid,
                 'userid'         => $data->userid,
-                'repeatid'       => $data->repeatid,
+                'repeatid'       => $this->get_mappingid('event', $data->repeatid),
                 'modulename'     => $data->modulename,
                 'eventtype'      => $data->eventtype,
                 'timestart'      => $this->apply_date_offset($data->timestart),
@@ -2590,17 +2684,26 @@ class restore_calendarevents_structure_step extends restore_structure_step {
                   FROM {event}
                  WHERE " . $DB->sql_compare_text('name', 255) . " = " . $DB->sql_compare_text('?', 255) . "
                    AND courseid = ?
-                   AND repeatid = ?
                    AND modulename = ?
                    AND timestart = ?
                    AND timeduration = ?
                    AND " . $DB->sql_compare_text('description', 255) . " = " . $DB->sql_compare_text('?', 255);
-        $arg = array ($params['name'], $params['courseid'], $params['repeatid'], $params['modulename'], $params['timestart'], $params['timeduration'], $params['description']);
+        $arg = array ($params['name'], $params['courseid'], $params['modulename'], $params['timestart'], $params['timeduration'], $params['description']);
         $result = $DB->record_exists_sql($sql, $arg);
         if (empty($result)) {
             $newitemid = $DB->insert_record('event', $params);
             $this->set_mapping('event', $oldid, $newitemid);
             $this->set_mapping('event_description', $oldid, $newitemid, $restorefiles);
+        }
+        // With repeating events, each event has the repeatid pointed at the first occurrence.
+        // Since the repeatid will be empty when the first occurrence is restored,
+        // Get the repeatid from the second occurrence of the repeating event and use that to update the first occurrence.
+        // Then keep a list of repeatids so we only perform this update once.
+        static $repeatids = array();
+        if (!empty($params['repeatid']) && !in_array($params['repeatid'], $repeatids)) {
+            // This entry is repeated so the repeatid field must be set.
+            $DB->set_field('event', 'repeatid', $params['repeatid'], array('id' => $params['repeatid']));
+            $repeatids[] = $params['repeatid'];
         }
 
     }
@@ -4232,6 +4335,14 @@ class restore_create_categories_and_questions extends restore_structure_step {
             $mapping->parentitemid = $this->get_mappingid('context', $this->task->get_old_contextid());
         }
         $data->contextid = $mapping->parentitemid;
+
+        // Before 3.1, the 'stamp' field could be erroneously duplicated.
+        // From 3.1 onwards, there's a unique index of (contextid, stamp).
+        // If we encounter a duplicate in an old restore file, just generate a new stamp.
+        // This is the same as what happens during an upgrade to 3.1+ anyway.
+        if ($DB->record_exists('question_categories', ['stamp' => $data->stamp, 'contextid' => $data->contextid])) {
+            $data->stamp = make_unique_id_code();
+        }
 
         // Let's create the question_category and save mapping
         $newitemid = $DB->insert_record('question_categories', $data);
