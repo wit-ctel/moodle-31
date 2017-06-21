@@ -102,6 +102,9 @@ class behat_completion extends behat_base {
         // Go to course editing.
         $this->execute("behat_general::click_link", get_string('editsettings'));
 
+        // Expand all the form fields.
+        $this->execute("behat_forms::i_expand_all_fieldsets");
+
         // Enable completion.
         $this->execute("behat_forms::i_set_the_field_to",
             array(get_string('enablecompletion', 'completion'), $toggle));
@@ -118,12 +121,13 @@ class behat_completion extends behat_base {
     public function activity_marked_as_complete($activityname, $activitytype, $completiontype) {
         if ($completiontype == "manual") {
             $imgalttext = get_string("completion-alt-manual-y", 'core_completion', $activityname);
+            $xpathtocheck = "//input[@type='image'][contains(@alt, '$imgalttext')]";
         } else {
             $imgalttext = get_string("completion-alt-auto-y", 'core_completion', $activityname);
+            $xpathtocheck = "//img[contains(@alt, '$imgalttext')]";
         }
         $csselementforactivitytype = "li.modtype_".strtolower($activitytype);
 
-        $xpathtocheck = "//img[contains(@alt, '$imgalttext')]";
         $this->execute("behat_general::should_exist_in_the",
             array($xpathtocheck, "xpath_element", $csselementforactivitytype, "css_element")
         );
@@ -138,12 +142,13 @@ class behat_completion extends behat_base {
     public function activity_marked_as_not_complete($activityname, $activitytype, $completiontype) {
         if ($completiontype == "manual") {
             $imgalttext = get_string("completion-alt-manual-n", 'core_completion', $activityname);
+            $xpathtocheck = "//input[@type='image'][contains(@alt, '$imgalttext')]";
         } else {
             $imgalttext = get_string("completion-alt-auto-n", 'core_completion', $activityname);
+            $xpathtocheck = "//img[contains(@alt, '$imgalttext')]";
         }
         $csselementforactivitytype = "li.modtype_".strtolower($activitytype);
 
-        $xpathtocheck = "//img[contains(@alt, '$imgalttext')]";
         $this->execute("behat_general::should_exist_in_the",
             array($xpathtocheck, "xpath_element", $csselementforactivitytype, "css_element")
         );

@@ -54,6 +54,9 @@ class behat_mod_feedback extends behat_base {
 
         $this->execute('behat_forms::i_select_from_the_singleselect', array($questiontype, $additem));
 
+        // Wait again, for page to reloaded.
+        $this->execute('behat_general::i_wait_to_be_redirected');
+
         $rows = $questiondata->getRows();
         $modifiedrows = array();
         foreach ($rows as $row) {
@@ -68,6 +71,24 @@ class behat_mod_feedback extends behat_base {
 
         $saveitem = $this->escape(get_string('save_item', 'feedback'));
         $this->execute("behat_forms::press_button", $saveitem);
+    }
+
+    /**
+     * Adds a question to the existing feedback with filling the form.
+     *
+     * The form for creating a question should be on one page.
+     *
+     * @When /^I add a page break to the feedback$/
+     */
+    public function i_add_a_page_break_to_the_feedback() {
+
+        $questiontype = $this->escape(get_string('add_pagebreak', 'feedback'));
+        $additem = $this->escape(get_string('add_item', 'feedback'));
+
+        $this->execute('behat_forms::i_select_from_the_singleselect', array($questiontype, $additem));
+
+        // Wait again, for page to reloaded.
+        $this->execute('behat_general::i_wait_to_be_redirected');
     }
 
     /**

@@ -91,7 +91,7 @@ class mod_forum_external extends external_api {
                 $forum->name = external_format_string($forum->name, $context->id);
                 // Format the intro before being returning using the format setting.
                 list($forum->intro, $forum->introformat) = external_format_text($forum->intro, $forum->introformat,
-                                                                                $context->id, 'mod_forum', 'intro', 0);
+                                                                                $context->id, 'mod_forum', 'intro', null);
                 // Discussions count. This function does static request cache.
                 $forum->numdiscussions = forum_count_discussions($forum, $cm, $course);
                 $forum->cmid = $forum->coursemodule;
@@ -274,6 +274,7 @@ class mod_forum_external extends external_api {
             $userpicture->size = 1; // Size f1.
             $post->userpictureurl = $userpicture->get_url($PAGE)->out(false);
 
+            $post->subject = external_format_string($post->subject, $modcontext->id);
             // Rewrite embedded images URLs.
             list($post->message, $post->messageformat) =
                 external_format_text($post->message, $post->messageformat, $modcontext->id, 'mod_forum', 'post', $post->id);
@@ -506,6 +507,8 @@ class mod_forum_external extends external_api {
                 $userpicture->size = 1; // Size f1.
                 $discussion->usermodifiedpictureurl = $userpicture->get_url($PAGE)->out(false);
 
+                $discussion->name = external_format_string($discussion->name, $modcontext->id);
+                $discussion->subject = external_format_string($discussion->subject, $modcontext->id);
                 // Rewrite embedded images URLs.
                 list($discussion->message, $discussion->messageformat) =
                     external_format_text($discussion->message, $discussion->messageformat,
@@ -631,7 +634,7 @@ class mod_forum_external extends external_api {
         $warnings = array();
 
         // Request and permission validation.
-        $forum = $DB->get_record('forum', array('id' => $params['forumid']), 'id', MUST_EXIST);
+        $forum = $DB->get_record('forum', array('id' => $params['forumid']), '*', MUST_EXIST);
         list($course, $cm) = get_course_and_cm_from_instance($forum, 'forum');
 
         $context = context_module::instance($cm->id);
@@ -686,7 +689,7 @@ class mod_forum_external extends external_api {
      * @throws moodle_exception
      */
     public static function view_forum_discussion($discussionid) {
-        global $DB, $CFG;
+        global $DB, $CFG, $USER;
         require_once($CFG->dirroot . "/mod/forum/lib.php");
 
         $params = self::validate_parameters(self::view_forum_discussion_parameters(),
@@ -707,6 +710,11 @@ class mod_forum_external extends external_api {
 
         // Call the forum/lib API.
         forum_discussion_view($modcontext, $forum, $discussion);
+
+        // Mark as read if required.
+        if (!$CFG->forum_usermarksread && forum_tp_is_tracked($forum)) {
+            forum_tp_mark_discussion_read($USER, $discussion->id);
+        }
 
         $result = array();
         $result['status'] = true;
@@ -827,6 +835,13 @@ class mod_forum_external extends external_api {
             throw new moodle_exception('nopostforum', 'forum');
         }
 
+        if (!empty($options['attachmentsid'])) {
+            // Ensure that the user has permissions to create attachments.
+            if (!has_capability('mod/forum:createattachment', $context)) {
+                $options['attachmentsid'] = 0;
+            }
+        }
+
         $thresholdwarning = forum_check_throttling($forum, $cm);
         forum_check_blocking_threshold($thresholdwarning);
 
@@ -907,7 +922,7 @@ class mod_forum_external extends external_api {
                 'forumid' => new external_value(PARAM_INT, 'Forum instance ID'),
                 'subject' => new external_value(PARAM_TEXT, 'New Discussion subject'),
                 'message' => new external_value(PARAM_RAW, 'New Discussion message (only html format allowed)'),
-                'groupid' => new external_value(PARAM_INT, 'The group, default to -1', VALUE_DEFAULT, -1),
+                'groupid' => new external_value(PARAM_INT, 'The group, default to 0', VALUE_DEFAULT, 0),
                 'options' => new external_multiple_structure (
                     new external_single_structure(
                         array(
@@ -939,7 +954,7 @@ class mod_forum_external extends external_api {
      * @since Moodle 3.0
      * @throws moodle_exception
      */
-    public static function add_discussion($forumid, $subject, $message, $groupid = -1, $options = array()) {
+    public static function add_discussion($forumid, $subject, $message, $groupid = 0, $options = array()) {
         global $DB, $CFG;
         require_once($CFG->dirroot . "/mod/forum/lib.php");
 
@@ -995,7 +1010,7 @@ class mod_forum_external extends external_api {
         } else {
             // Check if we receive the default or and empty value for groupid,
             // in this case, get the group for the user in the activity.
-            if ($groupid === -1 or empty($params['groupid'])) {
+            if (empty($params['groupid'])) {
                 $groupid = groups_get_activity_group($cm);
             } else {
                 // Here we rely in the group passed, forum_user_can_post_discussion will validate the group.
@@ -1005,6 +1020,13 @@ class mod_forum_external extends external_api {
 
         if (!forum_user_can_post_discussion($forum, $groupid, -1, $cm, $context)) {
             throw new moodle_exception('cannotcreatediscussion', 'forum');
+        }
+
+        if (!empty($options['attachmentsid'])) {
+            // Ensure that the user has permissions to create attachments.
+            if (!has_capability('mod/forum:createattachment', $context)) {
+                $options['attachmentsid'] = 0;
+            }
         }
 
         $thresholdwarning = forum_check_throttling($forum, $cm);

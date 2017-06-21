@@ -239,6 +239,7 @@ class external_api {
         } catch (Exception $e) {
             $exception = get_exception_info($e);
             unset($exception->a);
+            $exception->backtrace = format_backtrace($exception->backtrace, true);
             if (!debugging('', DEBUG_DEVELOPER)) {
                 unset($exception->debuginfo);
                 unset($exception->backtrace);
@@ -904,6 +905,7 @@ function external_format_string($str, $contextid, $striplinks = true, $options =
  *                      returned. Default false.
  *      allowid     :   If true then id attributes will not be removed, even when using htmlpurifier. Default (different from
  *                      format_text) true. Default changed id attributes are commonly needed.
+ *      blanktarget :   If true all <a> tags will have target="_blank" added unless target is explicitly specified.
  * </pre>
  *
  * @param string $text The content that may contain ULRs in need of rewriting.
@@ -982,9 +984,11 @@ class external_settings {
      * Constructor - protected - can not be instanciated
      */
     protected function __construct() {
-        if (!defined('AJAX_SCRIPT') && !defined('CLI_SCRIPT') && !defined('WS_SERVER')) {
+        if ((AJAX_SCRIPT == false) && (CLI_SCRIPT == false) && (WS_SERVER == false)) {
             // For normal pages, the default should match the default for format_text.
             $this->filter = true;
+            // Use pluginfile.php for web requests.
+            $this->file = 'pluginfile.php';
         }
     }
 
@@ -997,7 +1001,7 @@ class external_settings {
     /**
      * Return only one instance
      *
-     * @return object
+     * @return \external_settings
      */
     public static function get_instance() {
         if (self::$instance === null) {

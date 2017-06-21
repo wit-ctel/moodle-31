@@ -34,7 +34,7 @@ Feature: Add preconfigured tools via teacher interface
     And the field "Icon URL" matches value "http://download.moodle.org/unittest/test.jpg"
     And the field "Secure icon URL" matches value "https://download.moodle.org/unittest/test.jpg"
 
-  @javascript
+  @javascript @_switch_window
   Scenario: Add a preconfigured tool from a cartridge
     When I log in as "teacher1"
     And I follow "Course 1"
@@ -58,7 +58,7 @@ Feature: Add preconfigured tools via teacher interface
     And I press "Cancel"
     And I switch to the main window
 
-  @javascript
+  @javascript @_switch_window
   Scenario: Add and use a preconfigured tool
     When I log in as "teacher1"
     And I follow "Course 1"
@@ -67,7 +67,7 @@ Feature: Add preconfigured tools via teacher interface
       | Activity name | Test tool activity 1 |
     And I open "Test tool activity 1" actions menu
     And I follow "Edit settings" in the open menu
-    And I set the field "Launch/cartridge URL" to local url "/mod/lti/tests/fixtures/tool_provider.html"
+    And I set the field "Launch/cartridge URL" to local url "/mod/lti/tests/fixtures/tool_provider.php"
     And I press "Save and return to course"
     And I follow "Test tool activity 1"
     And I switch to "contentframe" iframe

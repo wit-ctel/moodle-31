@@ -294,7 +294,7 @@ function book_supports($feature) {
  * @return void
  */
 function book_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $booknode) {
-    global $USER, $PAGE;
+    global $USER, $PAGE, $OUTPUT;
 
     $plugins = core_component::get_plugin_list('booktool');
     foreach ($plugins as $plugin => $dir) {
@@ -309,7 +309,8 @@ function book_extend_settings_navigation(settings_navigation $settingsnav, navig
 
     $params = $PAGE->url->params();
 
-    if (!empty($params['id']) and !empty($params['chapterid']) and has_capability('mod/book:edit', $PAGE->cm->context)) {
+    if ($PAGE->cm->modname === 'book' and !empty($params['id']) and !empty($params['chapterid'])
+            and has_capability('mod/book:edit', $PAGE->cm->context)) {
         if (!empty($USER->editing)) {
             $string = get_string("turneditingoff");
             $edit = '0';
@@ -319,6 +320,7 @@ function book_extend_settings_navigation(settings_navigation $settingsnav, navig
         }
         $url = new moodle_url('/mod/book/view.php', array('id'=>$params['id'], 'chapterid'=>$params['chapterid'], 'edit'=>$edit, 'sesskey'=>sesskey()));
         $booknode->add($string, $url, navigation_node::TYPE_SETTING);
+        $PAGE->set_button($OUTPUT->single_button($url, $string));
     }
 }
 
