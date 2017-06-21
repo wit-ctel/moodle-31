@@ -198,9 +198,9 @@ YUI.add('moodle-enrol_manual-quickenrolment', function(Y) {
                 var index = 0, count = 0;
                 for (var i in roles) {
                     count++;
-                    var option = create('<option value="'+i+'">'+roles[i]+'</option>');
+                    var option = create('<option value="'+i+'">'+roles[i].name+'</option>');
                     if (i == v) {
-                        index = count-1;
+                        index = count;
                     }
                     s.append(option);
                 }
