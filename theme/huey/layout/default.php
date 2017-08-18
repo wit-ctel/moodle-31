@@ -53,7 +53,8 @@ echo $OUTPUT->doctype() ?>
 <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
     <div class="navbar-header pull-left">
-        <?php echo $OUTPUT->navbar_brand(); ?>
+        <?php // echo $OUTPUT->navbar_brand(); ?>
+        <a href="/" title="Homepage"><img src="<?php echo $OUTPUT->pix_url('moodle-wit-small', 'theme'); ?>" alt="moodle.wit Logo" class="moodle-wit-logo"/></a>
     </div>
     <div class="navbar-header pull-right">
         <?php echo $OUTPUT->user_menu(); ?>
