@@ -53,7 +53,8 @@ echo $OUTPUT->doctype() ?>
 <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
     <div class="navbar-header pull-left">
-        <?php echo $OUTPUT->navbar_brand(); ?>
+        <?php // echo $OUTPUT->navbar_brand(); ?>
+        <a href="/" title="Homepage"><img src="<?php echo $OUTPUT->pix_url('moodle-wit-small', 'theme'); ?>" alt="moodle.wit Logo" class="moodle-wit-logo"/></a>
     </div>
     <div class="navbar-header pull-right">
         <?php echo $OUTPUT->user_menu(); ?>
@@ -69,28 +70,25 @@ echo $OUTPUT->doctype() ?>
     </div>
 </nav>
 
-<header class="moodleheader">
-    <div class="container-fluid">
-    <a href="<?php echo $CFG->wwwroot ?>" class="logo"></a>
-    <?php echo $OUTPUT->page_heading(); ?>
-    </div>
-</header>
 
-<div id="page" class="container-fluid">
-    
-    <header id="page-header" class="clearfix">
-        <div id="page-navbar" class="clearfix">
-            <?php echo $OUTPUT->navbar(); ?>
-            <div class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></div>
-        </div>
 
-        <div id="course-header">
-            <?php echo $OUTPUT->course_header(); ?>
-        </div>
-    </header>
-    
+<div id="page" class="container-fluid">    
     <div id="page-content" class="row">
         <div id="region-main" class="<?php echo $regions['content']; ?>">
+            <header id="page-header" class="clearfix page-header-content">
+                <div class="container-fluid">
+                  <a href="<?php echo $CFG->wwwroot ?>" class="logo"></a>
+                  <?php echo $OUTPUT->page_heading(); ?>
+
+                  <?php echo $OUTPUT->navbar(); ?>  
+                  <div class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></div>
+                </div>
+               
+                <div id="course-header">
+                    <?php echo $OUTPUT->course_header(); ?>
+                </div>
+                
+            </header>
             <?php
             echo $OUTPUT->course_content_header();
             echo $OUTPUT->main_content();
