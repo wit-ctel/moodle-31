@@ -70,12 +70,13 @@ echo $OUTPUT->doctype() ?>
     </div>
 </nav>
 
-
-
 <div id="page" class="container-fluid">    
     <div id="page-content" class="row">
         <div id="region-main" class="<?php echo $regions['content']; ?>">
             <header id="page-header" class="clearfix page-header-content">
+                <div id="course-header">
+                    <?php echo $OUTPUT->course_header(); ?>
+                </div>
                 <div class="container-fluid">
                   <a href="<?php echo $CFG->wwwroot ?>" class="logo"></a>
                   <?php echo $OUTPUT->page_heading(); ?>
@@ -83,11 +84,6 @@ echo $OUTPUT->doctype() ?>
                   <?php echo $OUTPUT->navbar(); ?>  
                   <div class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></div>
                 </div>
-               
-                <div id="course-header">
-                    <?php echo $OUTPUT->course_header(); ?>
-                </div>
-                
             </header>
             <?php
             echo $OUTPUT->course_content_header();
