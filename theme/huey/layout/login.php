@@ -53,8 +53,8 @@ echo $OUTPUT->doctype() ?>
     </div>
     <?php echo $OUTPUT->main_content(); ?>
     <div id="login__support-container">
-      <a class="login__support login__student-support" href="#"><img src="<?php echo $OUTPUT->pix_url('support-icon', 'theme'); ?>"><span class="login__support-text">Student Support</span></a>
-      <a class="login__support login__staff-support" href="#"><img src="<?php echo $OUTPUT->pix_url('academic-icon', 'theme'); ?>"><span class="login__support-text">Staff Support</span></a>
+      <a class="login__support login__student-support" href="http://ctel.wit.ie/support/students"><img src="<?php echo $OUTPUT->pix_url('support-icon', 'theme'); ?>"><span class="login__support-text">Student Support</span></a>
+      <a class="login__support login__staff-support" href="http://ctel.wit.ie/support/staff/"><img src="<?php echo $OUTPUT->pix_url('academic-icon', 'theme'); ?>"><span class="login__support-text">Staff Support</span></a>
     </div>
   </div>
 
