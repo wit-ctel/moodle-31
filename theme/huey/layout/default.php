@@ -78,7 +78,6 @@ echo $OUTPUT->doctype() ?>
                     <?php echo $OUTPUT->course_header(); ?>
                 </div>
                 <div class="container-fluid">
-                  <a href="<?php echo $CFG->wwwroot ?>" class="logo"></a>
                   <?php echo $OUTPUT->page_heading(); ?>
 
                   <?php echo $OUTPUT->navbar(); ?>  
