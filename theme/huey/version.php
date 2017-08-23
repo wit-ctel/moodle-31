@@ -24,9 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2017013101;
+$plugin->version   = 2017082301;
 $plugin->requires  = 2016052300;
-$plugin->release  = '0.0.4';
+$plugin->release  = '0.0.5';
 $plugin->maturity  = MATURITY_BETA;
 $plugin->component = 'theme_huey';
 $plugin->dependencies = array(
