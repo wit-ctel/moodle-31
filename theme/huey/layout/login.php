@@ -32,7 +32,6 @@ echo $OUTPUT->doctype() ?>
 </head>
 
 <body <?php echo $OUTPUT->body_attributes(); ?> class="login">
-        
     <?php if (preg_match('/^https?:\/\/staging./', $PAGE->url)) { ?>
       <div class="alert alert-warning">
         <p class="text-center">You are using Moodle Staging site</p>
@@ -40,95 +39,24 @@ echo $OUTPUT->doctype() ?>
     <?php } ?>
 
     <?php echo $OUTPUT->standard_top_of_body_html() ?>
-
-    <div id="page" class="container">
+  <div id="login__banner">
     
-        <div id="page-content" class="row">
-          <div id="region-main" class="<?php echo $regions['content']; ?>">
+    <img id="login__banner-logo" src="<?php echo $OUTPUT->pix_url('wit_logo', 'theme'); ?>"/>
+    <?php echo $OUTPUT->login_notification(); ?>
+  </div>
+  <div id="login__container">
+    <div id="login__moodle-logo">
+      <img src="<?php echo $OUTPUT->pix_url('moodle-wit-logo', 'theme'); ?>">
+    </div>
+    <div id="login__avatar-container">
+      <img src="<?php echo $OUTPUT->pix_url('no_profile_img', 'theme'); ?>">
+    </div>
+    <?php echo $OUTPUT->main_content(); ?>
+    <div id="login__support-container">
+      <a class="login__support login__student-support" href="http://ctel.wit.ie/support/students"><img src="<?php echo $OUTPUT->pix_url('support-icon', 'theme'); ?>"><span class="login__support-text">Student Support</span></a>
+      <a class="login__support login__staff-support" href="http://ctel.wit.ie/support/staff/"><img src="<?php echo $OUTPUT->pix_url('academic-icon', 'theme'); ?>"><span class="login__support-text">Staff Support</span></a>
+    </div>
+  </div>
 
-            <?php echo $OUTPUT->login_notification(); ?>
-            
-            <?php echo $OUTPUT->main_content(); ?>
-            <small class="image-attribution">&copy; Image courtesy of Terry Murphy Photography</small>
-          </div>
-          
-          
-          <?php
-              /* 
-                require_once($CFG->dirroot .'/mod/forum/lib.php');
-
-                // need to login 'guest' user to view news items
-                $guest = get_complete_user_data('id', $CFG->siteguest);
-                complete_user_login($guest);
-                $USER->autologinguest = true;
-
-                if (! $newsforum = forum_get_course_forum($SITE->id, 'news')) {
-                  print_error('cannotfindorcreateforum', 'forum');
-                }
-
-                // fetch news forum context for proper filtering to happen
-                $cm = get_coursemodule_from_instance('forum', $newsforum->id, $SITE->id, false, MUST_EXIST);
-                        
-                $discussions = forum_get_discussions($cm, 'p.modified DESC', true, -1, 1);
-        
-                if (count($discussions) > 0) {
-                    echo html_writer::start_tag('div', array('class' => 'clearfix col-md-8'));
-            
-                    $strftimerecent = get_string('strftimerecentfull');
-                    
-                    foreach ($discussions as $discussion) {
-                        
-                        $discussion_url = $CFG->wwwroot.'/mod/forum/discuss.php?d='.$discussion->discussion;
-    
-                        echo html_writer::start_tag('article', array('class' => 'announcement'));
-                        echo html_writer::start_tag('header');
-                        echo html_writer::tag('h4', 
-                                  html_writer::link('#announcement-content', $discussion->subject . ' &raquo;', array('class' => 'announcement__link', 'data-toggle' => 'collapse')), 
-                                            array('class' => 'announcement__title'));    
-                                         
-                        echo html_writer::tag('p', 'posted by ' . html_writer::tag('i', fullname($discussion)) . 
-                                          ' on ' . html_writer::tag('i', userdate($discussion->modified, $strftimerecent)), 
-                                            array('class' => 'announcement__meta'));
-                        echo html_writer::end_tag('header');                    
-                        echo html_writer::tag('div', $discussion->message, array('class' => 'announcement__body collapse', 'id' => 'announcement-content'));                    
-    
-                      echo html_writer::end_tag('article');
-                  }
-          
-                  echo html_writer::end_tag('div');
-                }
-              */
-              ?>
-      
-      </div>
-  
-    </div> <!-- end #page -->
-  
-  <footer id="page-footer">
-    <section class="footer-section">
-      <div class="container footer-inner">
-        <div class="row">
-            <div class="col-md-6">
-            <a title="go to Waterford Institute of Technology homepage" class="logo site-brand__logo" href="http://wit.ie/">
-              <img src="<?php echo $OUTPUT->pix_url('brand-logo', 'theme'); ?>" alt="Waterford Institute of Technology" />
-            </a>
-            <nav>
-              <ul class="footer-nav">
-                <li><a href="http://elearning.wit.ie/support">Help</a></li>
-                <li><a href="http://docs.moodle.org">Moodle.org Docs</a></li>
-                <li><a href="http://elearning.wit.ie/about">Contact Us</a></li>
-               </ul>
-             </nav>
-        </div>
-        <div class="col-md-6">
-            <p class="site-usage-policy">Users of Moodle in Waterford Institute of Technology are reminded that your use of the Virtual Learning Environment may be logged and this information, with other personal data contained within the system, may be used by lecturers and/or facilitators to monitor progress and completion of modules.</p> 
-        </div>     
-         </div> <!-- end .row -->
-       </div> <!-- end .container -->
-     </section>
-  </footer>
-
-  <?php echo $OUTPUT->standard_end_of_body_html() ?>
-
-  </body>
+</body>
 </html>

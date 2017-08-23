@@ -14,28 +14,30 @@
 @gray-light:             lighten(@gray-base, 60%);   // #999
 @gray-lighter:           lighten(@gray-base, 93.5%); // #eee
 
-@brand-primary:         #446E9B;
-@brand-success:         #3CB521;
-@brand-info:            #5BC0DE;
-@brand-warning:         #D47500;
-@brand-danger:          #CD0200;
-
+@brand-primary:         darken(#428bca, 6.5%); // #446E9B;
+@brand-success:         #29bf12;  //#3CB521;
+@brand-info:            #5bc0de;
+@brand-warning:         #fed766; //#D47500;
+@brand-danger:          #fe4a49; //#CD0200;
 
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-@body-bg:               #fff;
+@body-bg:               #f4f4f4;
 //** Global text color on `<body>`.
 @text-color:            @gray;
 
+@white-bg: #fff;
+
 //** Global textual link color.
-@link-color:            #237DAC;
+@link-color:            #00acdf;
 //** Link hover color set via `darken()` function.
-@link-hover-color:      #056495;
+@link-hover-color:      #007193;
 //** Link hover decoration.
 @link-hover-decoration: underline;
+
 
 //** alternative (orange) link color
 @link-alt-color:        #c66a19; 
@@ -59,8 +61,8 @@
 
 @font-size-h1:            floor((@font-size-base * 2.6)); // ~36px
 @font-size-h2:            floor((@font-size-base * 2.15)); // ~30px
-@font-size-h3:            ceil((@font-size-base * 1.7)); // ~24px
-@font-size-h4:            ceil((@font-size-base * 1.25)); // ~18px
+@font-size-h3:            ceil((@font-size-base * 1.7)); // ~20px
+@font-size-h4:            ceil((@font-size-base * 1.25)); // ~16px
 @font-size-h5:            @font-size-base;
 @font-size-h6:            ceil((@font-size-base * 0.85)); // ~12px
 
@@ -70,7 +72,7 @@
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-@headings-font-family:    'Merriweather', serif;
+@headings-font-family:    Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; // 'Merriweather', serif;
 @headings-font-weight:    300;
 @headings-line-height:    1.1;
 @headings-color:          @gray-darker;
@@ -107,9 +109,9 @@
 @line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
 @line-height-small:         1.5;
 
-@border-radius-base:        4px;
-@border-radius-large:       6px;
-@border-radius-small:       3px;
+@border-radius-base:        0px;
+@border-radius-large:       0px;
+@border-radius-small:       0px;
 
 //** Global color for active items (e.g., navs or dropdowns).
 @component-active-color:    #fff;
@@ -136,7 +138,7 @@
 //** Background color used for `.table-striped`.
 @table-bg-accent:               #f9f9f9;
 //** Background color used for `.table-hover`.
-@table-bg-hover:                #f5f5f5;
+@table-bg-hover:                #f5fdfd;
 @table-bg-active:               @table-bg-hover;
 
 //** Border color for table and cell borders.
@@ -149,27 +151,27 @@
 
 @btn-font-weight:                normal;
 
-@btn-default-color:              #4a4a4a;
-@btn-default-bg:                 #eeeeee;
+@btn-default-color:              #fff;
+@btn-default-bg:                 #00acdf;
 @btn-default-border:             @btn-default-bg;
 
 @btn-primary-color:              #ffffff;
-@btn-primary-bg:                 @brand-primary;
-@btn-primary-border:             darken(@btn-primary-bg, 10%);
+@btn-primary-bg:                 @btn-default-bg;
+@btn-primary-border:             @btn-default-bg;
 
-@btn-success-color:              #ffffff;
+@btn-success-color:              #ffffff; //#dff0d8
 @btn-success-bg:                 @brand-success;
 @btn-success-border:             @btn-success-bg;
 
-@btn-info-color:                 #ffffff;
+@btn-info-color:                 #ffffff; //#afd9ee
 @btn-info-bg:                    @brand-info;
 @btn-info-border:                @btn-info-bg;
 
-@btn-warning-color:              #ffffff;
+@btn-warning-color:              #ffffff; // #fcf8e3
 @btn-warning-bg:                 @brand-warning;
-@btn-warning-border:             @btn-warning-bg;
+@btn-warning-border:             @btn-warning-bg; 
 
-@btn-danger-color:               #ffffff;
+@btn-danger-color:               #ffffff; // #e4b9b9
 @btn-danger-bg:                  @brand-danger;
 @btn-danger-border:              @btn-danger-bg;
 
@@ -505,8 +507,8 @@
 @state-success-bg:               #dff0d8;
 @state-success-border:           darken(spin(@state-success-bg, -10), 5%);
 
-@state-info-text:                #3a87ad;
-@state-info-bg:                  #d9edf7;
+@state-info-text:                #00acdf;
+@state-info-bg:                  #f4f4f4;
 @state-info-border:              darken(spin(@state-info-bg, -10), 7%);
 
 @state-warning-text:             #c09853;
@@ -793,7 +795,7 @@
 //##
 
 @breadcrumb-padding-vertical:   8px;
-@breadcrumb-padding-horizontal: 15px;
+@breadcrumb-padding-horizontal: 0px;
 //** Breadcrumb background color
 @breadcrumb-bg:                 #f5f5f5;
 //** Breadcrumb text color
@@ -808,7 +810,7 @@
 //
 //##
 
-@carousel-text-shadow:                        0 1px 2px rgba(0,0,0,.6);
+@carousel-text-shadow:                        0;
 
 @carousel-control-color:                      #fff;
 @carousel-control-width:                      15%;
@@ -827,7 +829,7 @@
 
 @close-font-weight:           bold;
 @close-color:                 #000;
-@close-text-shadow:           0 1px 0 #fff;
+@close-text-shadow:           0;
 
 
 //== Code

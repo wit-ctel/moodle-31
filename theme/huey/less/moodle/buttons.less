@@ -12,10 +12,10 @@ input[type="submit"],
 input[type="reset"],
 #notice .singlebutton + .singlebutton input,
 .submit.buttons input[name="cancel"] {
-  .btn-shadow(@btn-default-bg);
+  
 
   &:hover {
-    .btn-shadow(darken(@btn-default-bg, 4%));
+    
   }
 }
 
@@ -23,9 +23,25 @@ input.form-submit,
 #id_submitbutton, 
 #id_submitbutton2,
 .singlebutton input[value="Continue"] {
-  .btn-shadow(@btn-primary-bg);
+  
 
   &:hover {
-    .btn-shadow(darken(@btn-primary-bg, 4%));
+    
   }
+}
+.btn-default{
+	background: @btn-default-bg;
+	border:1px solid @btn-default-bg;
+}
+.btn-default:hover{
+	background: darken(@btn-default-bg, 10%);
+	border:1 solid darken(@btn-default-bg, 10%);
+}
+.btn-primary{
+	background: @btn-default-bg;
+	border:1px solid @btn-default-bg;
+}
+.btn-primary:hover{
+	background: darken(@btn-default-bg, 10%);
+	border:1 solid darken(@btn-default-bg, 10%);
 }
