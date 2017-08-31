@@ -57,6 +57,6 @@ echo $OUTPUT->doctype() ?>
       <a class="login__support login__staff-support" href="http://ctel.wit.ie/support/staff/"><img src="<?php echo $OUTPUT->pix_url('academic-icon', 'theme'); ?>"><span class="login__support-text">Staff Support</span></a>
     </div>
   </div>
-
+<?php echo $OUTPUT->standard_end_of_body_html() ?>
 </body>
 </html>
