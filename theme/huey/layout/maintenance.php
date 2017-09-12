@@ -48,7 +48,6 @@ echo $OUTPUT->doctype() ?>
       <div id="page-content" class="row">
         <div id="region-main" class="<?php echo $regions['content']; ?>">
           <?php echo $OUTPUT->main_content(); ?>
-          <small class="image-attribution">&copy; Image courtesy of Terry Murphy Photography</small>
         </div>
       </div>
   
